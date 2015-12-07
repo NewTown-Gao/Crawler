@@ -9,5 +9,6 @@ __author__ = 'NewTown'
 import GrabPage
 
 if __name__ == '__main__':
-    gp = GrabPage.GrabPage("http://www.sina.com")
-    gp.DownHtml("mySina.html")
+    gp = GrabPage.GrabPage("http://www.sina.com/")
+    # gp.DownHtml("baidu.html")
+    gp.GetHtml('test.html')
