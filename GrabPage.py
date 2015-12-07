@@ -31,7 +31,7 @@ class GrabPage(object):
             if self._info_.get('Content-Encoding') == 'gzip':
                 print('Content_Encoding : gzip')
                 buf = StringIO(str(res.read()))
-                rf1 = gzip.GzipFile(fileobj=buf)
-                # data = rf1.read()
+                rf = gzip.GzipFile(fileobj=buf)
+                # data = rf.read()
             with open(filePath,'w') as wf:
                 wf.write(str(data))
