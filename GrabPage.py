@@ -11,6 +11,7 @@ from urllib import response
 from http.client import HTTPMessage
 import gzip
 from io import StringIO
+from urllib import error
 
 class GrabPage(object):
     def __init__(self,url):
@@ -45,8 +46,14 @@ class GrabPage(object):
         user_agent = 'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
         headers = { 'User-Agent' : user_agent }
         req = request.Request(self._url_,headers = headers)
-        resp = request.urlopen(req)
-        print(resp.info())
-        data = resp.read().decode('utf-8')
+        try:
+            resp = request.urlopen(req)
+        except error.URLError as e:
+            raise "some error"
+            print("URLError:",e.errno)
+        finally:
+            if resp:
+                print(resp.info())
+                data = resp.read().decode('utf-8')
         with open(filePath,'w',encoding='utf-8') as wf:
                 wf.write(data)
